@@ -147,7 +147,6 @@ jobs:
         run: |
           if ('${{ matrix.platform }}' -eq 'linux-18.04') {
             sudo apt-get install tk8.6-dev
-            sudo make
           }
 
       - name: Verbose sysconfig dump
