@@ -144,7 +144,7 @@ jobs:
       - name: Install missing
         run: |
           if ('${{ matrix.platform }}' -eq 'linux-18.04') {
-            apt-get install python3-tk
+            sudo apt install python3-tkinter
           }
 
       - name: Verbose python binary links
