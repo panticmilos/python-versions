@@ -145,8 +145,6 @@ jobs:
         run: |
           if ('${{ matrix.platform }}' -eq 'linux-18.04') {
             sudo apt-get install python3-tk
-            sudo apt-get install python-support
-            sudo update-python-modules -a
           }
 
       - name: Verbose python binary links
