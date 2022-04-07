@@ -130,25 +130,30 @@ jobs:
             }
         working-directory: ${{ runner.temp }}/${{ env.ARTIFACT_NAME }}
 
+      - name: Install missing tkinter
+        run: |
+          if ('${{ matrix.platform }}' -eq 'linux-18.04') {
+            sudo apt-get install tk8.6-dev
+            sudo make
+          }
+
       - name: Setup Python ${{ env.VERSION }}
         uses: actions/setup-python@v2
         with:
           python-version: ${{ env.VERSION }}
           architecture: ${{ matrix.arch }}
 
+      - name: Install missing tkinter2
+        run: |
+          if ('${{ matrix.platform }}' -eq 'linux-18.04') {
+            sudo apt-get install tk8.6-dev
+            sudo make
+          }
+
       - name: Verbose sysconfig dump
         if: runner.os == 'Linux' || runner.os == 'macOS'
         run: python ./sources/python-config-output.py
         working-directory: ${{ github.workspace }}/tests
-
-      - name: Install missing tkinter
-        run: |
-          if ('${{ matrix.platform }}' -eq 'linux-18.04') {
-            sudo apt-get update
-            sudo apt-get install python3-tk
-            sudo apt-get install python-support
-            sudo update-python-modules -a
-          }
 
       - name: Verbose python binary links
         if: runner.os == 'Linux' || runner.os == 'macOS'
