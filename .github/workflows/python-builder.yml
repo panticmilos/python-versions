@@ -141,6 +141,12 @@ jobs:
         run: python ./sources/python-config-output.py
         working-directory: ${{ github.workspace }}/tests
 
+      - name: Install missing
+        run: |
+          if ('${{ matrix.platform }}' -eq 'linux18.04') {
+            apt-get install python3-tk
+          }
+
       - name: Verbose python binary links
         if: runner.os == 'Linux' || runner.os == 'macOS'
         run: |
